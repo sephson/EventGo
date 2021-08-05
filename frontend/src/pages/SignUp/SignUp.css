@@ -1,0 +1,18 @@
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10rem 0 10rem 0;
+  gap: 1rem;
+}
+
+.signup-input {
+  padding: 0.6rem;
+  border-radius: 0.5rem;
+}
+
+.signup-button {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: #ffb037;
+}
