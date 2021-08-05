@@ -13,6 +13,7 @@ a {
 
 .navbarLogo {
   margin: auto;
+  color: #ffb037;
 }
 
 .nav-links {
@@ -95,19 +96,21 @@ h1 {
     transition: all 0.7s ease;
   }
   .nav-menu.active {
-    left: -1%;
+    left: 25%;
     opacity: 1;
     transition: all 0.5s ease;
     z-index: 1;
     overflow: hidden;
     position: fixed;
-    text-align-last: start;
+    background-color: white;
+    padding: 0;
+    border-radius: 1rem;
+    height: auto;
   }
 
   .nav-links {
     color: #364547;
-    font-size: 1.3rem;
-    font-weight: 700;
+    font-weight: 500;
     list-style: none;
     text-align: center;
     margin: 1rem 0 1rem;

@@ -18,7 +18,7 @@ const Navbar = () => {
         <div className="desktop">
           <div className="left-side-nav">
             <Link to="/">
-              <h1 className="navbarLogo">eventGo</h1>
+              <h1 className="navbarLogo">eventgo</h1>
             </Link>
           </div>
 
