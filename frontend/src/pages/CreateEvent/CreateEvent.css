@@ -45,6 +45,76 @@
   margin-top: 1rem;
 }
 
+.main-event {
+  display: flex;
+  flex-direction: column;
+}
+
+.image-prev {
+  width: 300px;
+  min-height: 100px;
+  border: 2px solid #dddddd;
+  margin-top: 15px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.preview-image {
+  width: 100%;
+  object-fit: cover;
+}
+
+.event-btn {
+  padding: 0.5rem;
+  color: white;
+  font-size: inherit;
+  background-color: #ffb037;
+  border: none;
+  border-radius: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-end;
+}
+
+.event-btn:hover {
+  padding: 0.5rem;
+  color: white;
+  font-size: inherit;
+  background-color: #ffb037c7;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.textarea {
+  width: auto;
+}
+
+.publish {
+  width: max-content;
+  margin-top: 3rem;
+  place-self: flex-end;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #ffb037;
+  color: white;
+  font-weight: 900;
+}
+
+.publish:hover {
+  width: max-content;
+  margin-top: 3rem;
+  place-self: flex-end;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #ffb037c7;
+  color: white;
+  font-weight: 900;
+}
+
 @media screen and (max-width: 800px) {
   .create-event {
     display: grid;
