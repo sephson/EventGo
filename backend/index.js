@@ -3,12 +3,14 @@ dotenv.config({ path: "./config.env" });
 const express = require("express");
 const connectDB = require("./Config/db");
 const userRoute = require("./Routes/UserRoute");
+
 const app = express();
 connectDB();
 
 app.use(express.json());
 
-app.use("/api/user", userRoute);
+app.use("/users", userRoute);
+
 const server = app.listen(process.env.PORT, () =>
   console.log(`server running at ${process.env.PORT}`)
 );

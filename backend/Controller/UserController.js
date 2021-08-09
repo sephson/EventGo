@@ -1,15 +1,22 @@
 const User = require("../Models/UserModel");
 
-exports.register = async () => {
+exports.signup = async (req, res, next) => {
   const { username, email, password } = req.body;
 
   try {
-    const user = User.create({
+    const user = await User.create({
       username,
       email,
       password,
     });
 
-    // res.status(200).json(user);
-  } catch (error) {}
+    getToken(user, 200, res);
+  } catch (error) {
+    next();
+  }
+};
+
+const getToken = (user, statusCode, res) => {
+  const token = user.getSignedToken();
+  res.status(statusCode).json({ success: true, token });
 };

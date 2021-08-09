@@ -27,6 +27,25 @@ const UserSchema = new mongoose.Schema({
   resetPasswordExpire: Date,
 });
 
+UserSchema.pre("save", async function (next) {
+  //if password is not changed!
+  if (!this.isModified("password")) {
+    next(); // move to the next middleware that succeeds the current middleware
+  }
+
+  //salting and hashing
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
+});
+
+//generate web token
+UserSchema.methods.getSignedToken = () => {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE,
+  });
+};
+
 const User = mongoose.model("User", UserSchema);
 
 module.exports = User;
