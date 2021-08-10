@@ -40,10 +40,16 @@ UserSchema.pre("save", async function (next) {
 });
 
 //generate web token
-UserSchema.methods.getSignedToken = () => {
+UserSchema.methods.getSignedToken = function () {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
+};
+
+//compare password
+UserSchema.methods.matchPasswords = async function (password) {
+  //collect the password from user to compare with already existing one
+  return await bcrypt.compare(password, this.password);
 };
 
 const User = mongoose.model("User", UserSchema);

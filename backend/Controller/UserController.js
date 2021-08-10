@@ -10,9 +10,25 @@ exports.signup = async (req, res, next) => {
       password,
     });
 
-    getToken(user, 200, res);
+    getToken(user, 201, res);
   } catch (error) {
     next();
+  }
+};
+
+exports.signin = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email }).select("+password"); //include password
+    if (!user) res.status(404).json("password or email doesnt match");
+
+    const matchPass = await user.matchPasswords(password);
+    if (!matchPass) return res.status(404).json("incorrect");
+    else {
+      getToken(user, 200, res);
+    }
+  } catch (error) {
+    res.staus(500);
   }
 };
 
