@@ -1,4 +1,5 @@
 const User = require("../Models/UserModel");
+const errorResponse = require("../Utils/errorResponse");
 
 exports.signup = async (req, res, next) => {
   const { username, email, password } = req.body;
@@ -20,19 +21,21 @@ exports.signin = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email }).select("+password"); //include password
-    if (!user) res.status(404).json("password or email doesnt match");
+    if (!user) {
+      return next(new errorResponse("invalid credential", 404));
+    }
 
     const matchPass = await user.matchPasswords(password);
-    if (!matchPass) return res.status(404).json("incorrect");
+    if (!matchPass) return next(new errorResponse("invalid credential", 403));
     else {
       getToken(user, 200, res);
     }
   } catch (error) {
-    res.staus(500);
+    res.status(500).json({ success: false, error: error.message });
   }
 };
 
 const getToken = (user, statusCode, res) => {
   const token = user.getSignedToken();
-  res.status(statusCode).json({ success: true, token });
+  res.status(statusCode).json({ success: true, token, user });
 };

@@ -1,8 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { signin } from "../../actions/userActions";
 import "./Navbar.css";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+
   const [click, setClick] = useState(false);
   const handleClick = () => {
     setClick(!click);
@@ -28,11 +34,15 @@ const Navbar = () => {
                 Create Event
               </li>
             </Link>
-            <Link to="/sign-up">
-              <li className="nav-links" onClick={closeMobileMenu}>
-                Sign up
-              </li>
-            </Link>
+            {userInfo ? (
+              <div>{userInfo?.user.username}</div>
+            ) : (
+              <Link to="/sign-up">
+                <li className="nav-links" onClick={closeMobileMenu}>
+                  Sign up
+                </li>
+              </Link>
+            )}
           </div>
 
           <div className="hamburger-menu">
