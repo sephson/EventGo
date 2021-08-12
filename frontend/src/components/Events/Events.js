@@ -16,35 +16,49 @@ const Events = () => {
     dispatch(allEvents());
   }, [dispatch]);
   // console.log(error ? "error oh" : "good");
+
+  const numberWithCommas = (x) => {
+    return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+  };
   return (
-    <Link to="/event-details">
+    <>
       {loading ? (
         <Loading type={"bars"} color={"#ffb037"} />
       ) : (
         <div className="event-container">
           {event.map((event) => {
             return (
-              <div className="single-event-wrap">
-                <div className="event-image">
-                  <img className="event-art" src={event.image} alt="eventart" />
+              <Link to={`/event-details/${event._id}`}>
+                <div className="single-event-wrap">
+                  <div className="event-image">
+                    <img
+                      className="event-art"
+                      src={event.image}
+                      alt="eventart"
+                    />
+                  </div>
+                  <main className="event-main">
+                    <h3 className="event-name">{event.title}</h3>
+                    <h4 className="event-date">
+                      {event.startDate}, {event.startTime}
+                    </h4>
+                    <p className="event-location">
+                      {event.location ? event.location : "Online"}
+                    </p>
+                    <em className="event-org">{event.organiser}</em>
+                    <p>
+                      {event.price
+                        ? `₦${numberWithCommas(event.price)}`
+                        : "Free"}
+                    </p>
+                  </main>
                 </div>
-                <main className="event-main">
-                  <h3 className="event-name">{event.title}</h3>
-                  <h4 className="event-date">
-                    {event.startDate}, {event.startTime}
-                  </h4>
-                  <p className="event-location">
-                    {event.location ? event.location : "Online"}
-                  </p>
-                  <em className="event-org">{event.organiser}</em>
-                  <p>₦{event.price ? event.price : "Free"}</p>
-                </main>
-              </div>
+              </Link>
             );
           })}
         </div>
       )}
-    </Link>
+    </>
   );
 };
 

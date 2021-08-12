@@ -16,7 +16,7 @@ function App() {
           <Route path="/sign-up" component={SignUp} />
           <Route path="/sign-in" component={SignIn} />
           <Route path="/create-event" component={CreateEvent} />
-          <Route path="/event-details" component={EventDetails} />
+          <Route path="/event-details/:eventId" component={EventDetails} />
           <Route path="/dashboard" component={Dash} />
         </Switch>
       </Router>

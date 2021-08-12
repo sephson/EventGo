@@ -1,0 +1,63 @@
+.dash-container {
+  padding: 0 3rem 0.7rem;
+  color: #364547;
+
+}
+
+.manage-events {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  color: #ffb037;
+  gap: 1.5rem;
+}
+h1.dashboard {
+  margin: 0 0 0.5rem;
+}
+
+h3.header-left {
+  margin: 0;
+}
+h3.header-right {
+  margin: 0;
+}
+
+.myevent-events:hover {
+  background-color: #36454733;
+  padding: 1px;
+}
+
+.myevent-events {
+  color: #364547;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  margin: 1rem 0;
+}
+
+.myevent-events-title {
+}
+
+.myevent-events-icon {
+  align-self: center;
+  place-self: end;
+}
+
+@media screen and (max-width: 600px) {
+  .dash-container {
+    padding: 0.7rem 1rem 0.7rem;
+    color: #364547;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .dash-container {
+    padding: 0.7rem 1rem 0.7rem;
+    color: #364547;
+  }
+
+  .manage-events {
+    display: grid;
+    grid-template-columns: 1fr;
+    color: #ffb037;
+    gap: 1.5rem;
+  }
+}

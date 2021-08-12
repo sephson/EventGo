@@ -29,3 +29,43 @@ export const allEventReducer = (state = { event: [] }, action) => {
       return state;
   }
 };
+
+export const eventDetailsReducer = (state = { details: {} }, action) => {
+  switch (action.type) {
+    case "EVENT_DETAILS_REQUEST":
+      return { ...state, loading: true };
+
+    case "EVENT_DETAILS_SUCCESS":
+      return {
+        loading: false,
+        success: true,
+        details: action.payload,
+      };
+
+    case "EVENT_DETAILS_FAILED":
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const myCreatedEventsReducers = (state = {myEvents : []}, action) => {
+  switch (action.type) {
+    case "MYEVENT_REQUEST":
+      return { loading: true };
+
+    case "MYEVENT_SUCCESS":
+      return {
+        loading: false,
+        success: true,
+        myEvents: action.payload,
+      };
+
+    case "MYEVENT_FAILED":
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};

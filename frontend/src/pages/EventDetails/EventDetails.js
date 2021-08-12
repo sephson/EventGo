@@ -1,42 +1,52 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./EventDetails.css";
-import picture1 from "../../images/picture1.jpg";
 import { Link } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
+import { eventDetailInfo } from "../../actions/eventActions";
+import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
+import Navbar from "../../components/Navbar/Navbar";
 
 const EventDetails = () => {
+  const eventId = useParams().eventId;
+
+  const dispatch = useDispatch();
+
+  const eventDetail = useSelector((state) => state.eventDetail);
+  const { loading, details, error } = eventDetail;
+  console.log(details);
+
+  useEffect(() => {
+    dispatch(eventDetailInfo(eventId));
+  }, [dispatch, eventId]);
+
   return (
     <>
+      <Navbar />
       <div className="event-details-container">
-        <div className="left-side-nav">
-          <Link to="/">
-            <h1 className="navbarLogo">eventgo</h1>
-          </Link>
-        </div>
-
         <div className="event-det-wrap">
           <div className="event-image-wrap">
-            <img className="event-details-art " src={picture1} alt="eventart" />
-            <p className="event-description">
-              So how did the classical Latin become so incoherent? According to
-              McClintock, a 15th century typesetter likely scrambled part of
-              Cicero's De Finibus in order to provide placeholder text to mockup
-              various fonts for a type specimen book. It's difficult to find
-              examples of lorem ipsum in use before Letraset made it popular as
-              a dummy text in the 1960s, although McClintock says he remembers
-              coming across the lorem ipsum passage in a book of old metal type
-              samples. So far he hasn't relocated where he once saw the passage,
-              but the popularity of Cicero in the 15th century supports the
-              theory that the filler text has been used for centuries
-            </p>
+            <img
+              className="event-details-art "
+              src={details.image}
+              alt="eventart"
+            />
+            <p className="event-description">{details.description}</p>
           </div>
 
           <main className=" main-event-det">
-            <h3 className="">WHY DID I GET MARRIED?</h3>
-            <h4 className="">12th Aug, 2020. 9:00am</h4>
-            <p className="">THE CONSORT LUXURY SUITES #Plot 799 Abuja</p>
-            <em className="">The Chayil Lady Ministry</em>
-            <p>Free</p>
+            <h3 className="">{details.title}</h3>
+            <p className="">{details.startDate}</p>
+            <p className="">{details.startTime}</p>
+            <p className="">{details.endDate}</p>
+            <p className="">{details.endTime}</p>
+            <p className="">{details.location ? details.location : "Online"}</p>
+            <em className="">{details.organiser}</em>
+            <p>
+              {details.price === 0 || details.price === null
+                ? "Free"
+                : `₦${details.price}`}
+            </p>
             <button className="event-reg-btn">Register</button>
           </main>
         </div>

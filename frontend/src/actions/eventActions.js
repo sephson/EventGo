@@ -84,3 +84,51 @@ export const allEvents = () => async (dispatch) => {
     });
   }
 };
+
+export const eventDetailInfo = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "EVENT_DETAILS_REQUEST",
+    });
+
+    const config = {
+      "Content-Type": "application/json",
+    };
+
+    const { data } = await axios.get(`/event/event-details/${id}`, config);
+
+    dispatch({
+      type: "EVENT_DETAILS_SUCCESS",
+      payload: data,
+    });
+  } catch (e) {
+    dispatch({
+      type: "EVENT_DETAILS_FAILED",
+      payload: e,
+    });
+  }
+};
+
+export const myCreatedEvent = (userId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "MYEVENT_REQUEST",
+    });
+
+    const config = {
+      "Content-Type": "application/json",
+    };
+
+    const { data } = await axios.get(`/event/events-created/${userId}`, config);
+
+    dispatch({
+      type: "MYEVENT_SUCCESS",
+      payload: data,
+    });
+  } catch (e) {
+    dispatch({
+      type: "MYEVENT_FAILED",
+      payload: e,
+    });
+  }
+};

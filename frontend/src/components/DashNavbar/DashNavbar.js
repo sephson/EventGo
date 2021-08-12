@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 // import { signin } from "../../actions/userActions";
-import "./Navbar.css";
 
 const Navbar = () => {
   // const dispatch = useDispatch();
@@ -34,19 +33,10 @@ const Navbar = () => {
                 Create Event
               </li>
             </Link>
-            {userInfo ? (
-              <Link to={`/dashboard`}>
-                <>
-                  <div className="username-user">{userInfo?.user.username}</div>
-                </>
-              </Link>
-            ) : (
-              <Link to="/sign-up">
-                <li className="nav-links" onClick={closeMobileMenu}>
-                  Sign up
-                </li>
-              </Link>
-            )}
+
+            <>
+              <div className="username-user">{userInfo?.user.username}</div>
+            </>
           </div>
 
           <div className="hamburger-menu">
@@ -71,23 +61,15 @@ const Navbar = () => {
               Create Event
             </li>
           </Link>
-          {userInfo ? (
-            <Link to={`/dashboard`}>
-              <li
-                className="nav-links"
-                onClick={closeMobileMenu}
-                // className="username-user"
-              >
-                {userInfo?.user.username}
-              </li>
-            </Link>
-          ) : (
-            <Link to="/sign-up">
-              <li className="nav-links" onClick={closeMobileMenu}>
-                Sign up
-              </li>
-            </Link>
-          )}
+          <Link to={`/dashboard`}>
+            <li
+              className="nav-links"
+              onClick={closeMobileMenu}
+              // className="username-user"
+            >
+              {userInfo?.user.username}
+            </li>
+          </Link>
         </ul>
       </nav>
     </>

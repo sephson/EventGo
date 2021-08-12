@@ -14,6 +14,9 @@ const EventSchema = new mongoose.Schema(
       type: String,
       //   require: true,
     },
+    organiser: {
+      type: String,
+    },
     online: {
       type: String,
     },
