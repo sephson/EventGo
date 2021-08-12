@@ -19,6 +19,11 @@ export const signup = (username, email, password) => async (dispatch) => {
       payload: data,
     });
 
+    dispatch({
+      type: "USER_SIGNIN_SUCCESS",
+      payload: data,
+    });
+
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
@@ -51,7 +56,38 @@ export const signin = (email, password) => async (dispatch) => {
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
-      type: "USER_SIGNIN_SUCCESS",
+      type: "USER_SIGNIN_FAILED",
+      payload: error,
+    });
+  }
+};
+
+//for dashboard
+export const dash = (id) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: "USER_DASH_REQUEST",
+    });
+
+    const {
+      userSignin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorisation: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/users/dashboard/${id}`, config);
+
+    dispatch({
+      type: "USER_DASH_SUCCESS",
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: "USER_DASH_FAILED",
       payload: error,
     });
   }

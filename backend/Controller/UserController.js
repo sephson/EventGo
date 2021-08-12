@@ -35,6 +35,17 @@ exports.signin = async (req, res, next) => {
   }
 };
 
+exports.userDashboard = async (req, res, next) => {
+  const user = await User.findById(req.params.id);
+  if (!user) return next(new errorResponse("user not found", 404));
+
+  try {
+    getToken(user, 200, res);
+  } catch (error) {
+    next(new errorResponse("Not Authorised", 403));
+  }
+};
+
 const getToken = (user, statusCode, res) => {
   const token = user.getSignedToken();
   res.status(statusCode).json({ success: true, token, user });

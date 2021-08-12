@@ -2,7 +2,7 @@ import "./SignUp.css";
 import React, { useRef } from "react";
 import Footer from "../../components/Footer/Footer";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { signup } from "../../actions/userActions";
 
 const SignUp = () => {
@@ -11,9 +11,6 @@ const SignUp = () => {
   const password = useRef();
   const passwordAgain = useRef();
 
-  const userSignup = useSelector((state) => state.userSignup);
-  const { loading, error, userInfo } = userSignup;
-  console.log(error, loading);
   const dispatch = useDispatch();
 
   const handleSignup = (e) => {

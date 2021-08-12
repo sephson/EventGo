@@ -5,6 +5,7 @@ import SignUp from "./pages/SignUp/SignUp";
 import SignIn from "./pages/SignIn/SignIn";
 import CreateEvent from "./pages/CreateEvent/CreateEvent";
 import EventDetails from "./pages/EventDetails/EventDetails";
+import Dash from "./pages/Dashboard/Dash";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/sign-in" component={SignIn} />
           <Route path="/create-event" component={CreateEvent} />
           <Route path="/event-details" component={EventDetails} />
+          <Route path="/dashboard" component={Dash} />
         </Switch>
       </Router>
     </>

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { signin } from "../../actions/userActions";
+import { useSelector } from "react-redux";
+// import { signin } from "../../actions/userActions";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
@@ -35,7 +35,11 @@ const Navbar = () => {
               </li>
             </Link>
             {userInfo ? (
-              <div>{userInfo?.user.username}</div>
+              <Link to={`/dashboard`}>
+                <>
+                  <div className="username-user">{userInfo?.user.username}</div>
+                </>
+              </Link>
             ) : (
               <Link to="/sign-up">
                 <li className="nav-links" onClick={closeMobileMenu}>
