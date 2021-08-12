@@ -29,6 +29,9 @@
   padding: 1rem;
 }
 
+a {
+  color: inherit;
+}
 @media screen and (max-width: 960px) {
   .event-container {
     display: grid;

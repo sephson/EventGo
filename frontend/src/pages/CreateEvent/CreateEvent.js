@@ -21,6 +21,7 @@ const CreateEvent = ({ history }) => {
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState(0);
   const [view, setView] = useState();
+  const [disabled, setDisable] = useState(true);
   const dispatch = useDispatch();
 
   const userSignin = useSelector((state) => state.userSignin);
@@ -88,6 +89,34 @@ const CreateEvent = ({ history }) => {
     );
   };
 
+  const cr = useSelector((state) => state.createEvent);
+  const { loading, success } = cr;
+
+  const lengthHandler = (e) => {
+    if (
+      description.length < 2 ||
+      title.length < 2 ||
+      organiser.length < 2 ||
+      (location || online).length < 2 ||
+      image < 2 ||
+      startDate < 2 ||
+      startTime < 2
+    )
+      setDisable(true);
+    else {
+      setDisable(false);
+    }
+    console.log(description.length);
+  };
+
+  useEffect(() => {
+    if (success === true) {
+      history.push("/dashboard");
+    } else {
+      return "Failed to publish";
+    }
+  }, [success, history]);
+
   return (
     <div className="create-event">
       <div className="left-side-nav">
@@ -96,7 +125,11 @@ const CreateEvent = ({ history }) => {
         </Link>
       </div>
 
-      <form onSubmit={createEventHandler} className="event-info">
+      <form
+        onChange={lengthHandler}
+        onSubmit={createEventHandler}
+        className="event-info"
+      >
         <div className="basic-info">
           <h1>Basic Info</h1>
           <input
@@ -107,7 +140,7 @@ const CreateEvent = ({ history }) => {
           />
           <input
             value={organiser}
-            onChange={(e) => setOrganiser(e.target.value)}
+            onChange={(e) => setOrganiser(userInfo.user.username)}
             className="event-info-input"
             placeholder="Organiser"
           />
@@ -210,8 +243,8 @@ const CreateEvent = ({ history }) => {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
           />
-          <button type="submit" className="publish">
-            Publish
+          <button disabled={disabled} type="submit" className="publish">
+            {loading ? "publishing..." : "Publish"}
           </button>
         </div>
       </form>

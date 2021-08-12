@@ -37,3 +37,12 @@ exports.createEvent = async (req, res, next) => {
     res.status(500).json(error);
   }
 };
+
+exports.allEvents = async (req, res, next) => {
+  try {
+    const allEvents = await Event.find({});
+    res.status(200).json(allEvents);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};

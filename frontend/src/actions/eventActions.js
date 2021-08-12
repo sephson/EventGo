@@ -56,7 +56,31 @@ export const createEvent =
     } catch (error) {
       dispatch({
         type: "CREATE_EVENT_FAILED",
-        payload: error,
+        payload: error.message,
       });
     }
   };
+
+export const allEvents = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: "ALL_EVENT_REQUEST",
+    });
+
+    const config = {
+      "Content-Type": "application/json",
+    };
+
+    const { data } = await axios.get(`/event/all-events`, config);
+
+    dispatch({
+      type: "ALL_EVENT_SUCCESS",
+      payload: data,
+    });
+  } catch (e) {
+    dispatch({
+      type: "ALL_EVENT_FAILED",
+      payload: e,
+    });
+  }
+};

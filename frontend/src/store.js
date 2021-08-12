@@ -6,13 +6,14 @@ import {
   userSignUpReducer,
   userDashboardReducer,
 } from "./reducers/userReducer";
-import {createEventReducer} from "./reducers/eventReducer"
+import { createEventReducer, allEventReducer } from "./reducers/eventReducer";
 
 const reducer = combineReducers({
   userSignup: userSignUpReducer,
   userSignin: userSignInReducer,
   userDash: userDashboardReducer,
   createEvent: createEventReducer,
+  events: allEventReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")
