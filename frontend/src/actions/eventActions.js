@@ -257,13 +257,15 @@ export const peopleRegisteredList = (eventId) => async (dispatch, getState) => {
       },
     };
 
-    const { data } = await axios.get(`/people-who-registered-for-my-event/${eventId}`, config);
+    const { data } = await axios.get(
+      `/event/people-who-registered-for-my-event/${eventId}`,
+      config
+    );
 
     dispatch({
       type: "PEOPLE_REG_SUCCESS",
       payload: data,
     });
-
   } catch (error) {
     dispatch({
       type: "PEOPLE_REG_FAILED",

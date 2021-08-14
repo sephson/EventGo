@@ -15,8 +15,8 @@ import { Link } from "react-router-dom";
 const Dash = ({ history }) => {
   const dispatch = useDispatch();
 
-  const userDash = useSelector((state) => state.userDash);
-  const { user } = userDash;
+  // const userDash = useSelector((state) => state.userDash);
+  // const { user } = userDash;
   // console.log(user);
 
   const userSignin = useSelector((state) => state.userSignin);
@@ -46,10 +46,9 @@ const Dash = ({ history }) => {
     <div>
       <DashNavbar />
       <div className="dash-container event-details-container">
-        <h1 className="dashboard">Dashboard </h1>
         <div className="manage-events">
           <div>
-            <h3 className="header-left">Manage Events</h3>
+            <h4 className="header-left">Manage Events</h4>
             <>
               {loading ? (
                 <Loading
@@ -62,7 +61,9 @@ const Dash = ({ history }) => {
                 myEvents?.map((myEvent) => {
                   return (
                     <div className="myevent-events">
-                      <Link to={`/manage-event/${myEvent._id}`}>
+                      <Link
+                        to={`/manage-event/${myEvent._id}/${myEvent.title}`}
+                      >
                         <span className="myevent-events-title">
                           {myEvent.title}
                         </span>
@@ -81,7 +82,7 @@ const Dash = ({ history }) => {
             </>
           </div>
           <div>
-            <h3 className="header-right">Events You Registered For</h3>
+            <h4 className="header-right">Events You Registered For</h4>
             <>
               {iRegisteredFor?.map((ireg) => {
                 return (

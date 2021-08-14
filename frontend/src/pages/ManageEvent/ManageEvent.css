@@ -1,0 +1,24 @@
+.registered-users-info {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+}
+
+.event-list-container {
+  padding: 0.7rem 3rem 0.7rem;
+  background-color: #3645470f;
+  height: 100vh;
+}
+
+.reg-users-info-date {
+  place-self: flex-end;
+}
+
+@media screen and (max-width: 600px) {
+  .event-list-container {
+    padding: 0.7rem 1rem 0.7rem;
+  }
+  .registered-users-info {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+}

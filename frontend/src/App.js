@@ -23,7 +23,7 @@ function App() {
           />
           <Route path="/dashboard" component={Dash} />
           <Route path="/reg-success/:freeRegId" component={RegSuccess} />
-          <Route path="/manage-event/:eventId" component={ManageEvent} />
+          <Route path="/manage-event/:eventId/:title" component={ManageEvent} />
         </Switch>
       </Router>
     </>
