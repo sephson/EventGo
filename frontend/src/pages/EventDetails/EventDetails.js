@@ -1,28 +1,60 @@
 import React, { useEffect } from "react";
 import "./EventDetails.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
-import { eventDetailInfo } from "../../actions/eventActions";
+import {
+  eventDetailInfo,
+  freeEventReg,
+  addRegisteredUserToEventArray,
+} from "../../actions/eventActions";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 
-const EventDetails = () => {
+const EventDetails = ({ history }) => {
   const eventId = useParams().eventId;
 
   const dispatch = useDispatch();
 
   const eventDetail = useSelector((state) => state.eventDetail);
-  const { loading, details, error } = eventDetail;
-  console.log(details);
+  const { details } = eventDetail;
+  // console.log(details);
 
   useEffect(() => {
     dispatch(eventDetailInfo(eventId));
   }, [dispatch, eventId]);
 
+  const userSignin = useSelector((state) => state.userSignin);
+  const { userInfo } = userSignin;
+
+  const free = useSelector((state) => state.freeEvent);
+  const { loading, freeReg, error } = free;
+
+  const freeArr = useSelector((state) => state.freeEventArr);
+  const { success } = freeArr;
+
+  const handleFreeReg = () => {
+    if (!userInfo) {
+      history.push(`/sign-in`);
+    }
+    dispatch(
+      freeEventReg(userInfo?.user._id, eventId, userInfo?.user.username)
+    );
+    dispatch(addRegisteredUserToEventArray(eventId, userInfo?.user._id));
+  };
+
+  useEffect(() => {
+    if (freeReg?._id !== undefined) {
+      history.push(`/reg-success/${freeReg?._id}`);
+    }
+  }, [history, success, freeReg?._id]);
+
+  console.log(freeReg);
+
   return (
     <>
       <Navbar />
+
       <div className="event-details-container">
         <div className="event-det-wrap">
           <div className="event-image-wrap">
@@ -35,19 +67,63 @@ const EventDetails = () => {
           </div>
 
           <main className=" main-event-det">
-            <h3 className="">{details.title}</h3>
-            <p className="">{details.startDate}</p>
-            <p className="">{details.startTime}</p>
-            <p className="">{details.endDate}</p>
-            <p className="">{details.endTime}</p>
-            <p className="">{details.location ? details.location : "Online"}</p>
-            <em className="">{details.organiser}</em>
+            <h3 className="event-det-header">{details.title}</h3>
+            {details.endDate && details.endTime ? (
+              <>
+                <p className="event-det">
+                  {details.startDate}
+                  {`-${details.endDate}`}
+                </p>
+                <p className="event-det">
+                  {details.startTime}
+                  {`-${details.endTime}`}
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="event-det">Starts: {details.startDate}</p>
+                <p className="event-det">Time: {details.startTime}</p>
+              </>
+            )}
+
+            <p className="event-det">
+              {details.location ? details.location : "Online"}
+            </p>
+            <em className="event-det">{details?.organiser}</em>
             <p>
-              {details.price === 0 || details.price === null
+              {details?.price === 0 || details?.price === null
                 ? "Free"
                 : `₦${details.price}`}
             </p>
-            <button className="event-reg-btn">Register</button>
+            {console.log(details)}
+            {details?.freeRegistered?.includes(userInfo?.user._id) ? (
+              <h3 style={{ color: "red" }}>
+                YOU HAVE REGISTERED FOR THIS EVENT
+              </h3>
+            ) : (
+              <>
+                {details?.price === 0 || details?.price === null ? (
+                  <button onClick={handleFreeReg} className="event-reg-btn">
+                    {loading ? "Registering" : "Register"}
+                  </button>
+                ) : (
+                  <button className="event-reg-btn">
+                    Pay {`₦${details.price}`}
+                  </button>
+                )}
+              </>
+            )}
+
+            {/* {details.price === 0 || details.price === null ? (
+              <button onClick={handleFreeReg} className="event-reg-btn">
+                {loading ? "Registering" : "Register"}
+              </button>
+            ) : (
+              <button className="event-reg-btn">
+                Pay {`₦${details.price}`}
+              </button>
+            )} */}
+            {error ? "Failed" : ""}
           </main>
         </div>
       </div>

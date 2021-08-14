@@ -109,6 +109,29 @@ export const eventDetailInfo = (id) => async (dispatch) => {
   }
 };
 
+export const deleteEvent = (eventId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "DELETE_REQUEST",
+    });
+
+    const config = {
+      "Content-Type": "application/json",
+    };
+
+    await axios.delete(`/event/delete/${eventId}`, config);
+
+    dispatch({
+      type: "DELETE_SUCCESS",
+    });
+  } catch (e) {
+    dispatch({
+      type: "DELETE_FAILED",
+      payload: e,
+    });
+  }
+};
+
 export const myCreatedEvent = (userId) => async (dispatch) => {
   try {
     dispatch({
@@ -132,3 +155,60 @@ export const myCreatedEvent = (userId) => async (dispatch) => {
     });
   }
 };
+
+export const freeEventReg = (userId, eventId, username) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "FREE_EVENT_REG_REQUEST",
+    });
+
+    const config = {
+      "Content-Type": "application/json",
+    };
+
+    const { data } = await axios.post(
+      `/event/free-register-event/${eventId}`,
+      { userId, username },
+      config
+    );
+
+    dispatch({
+      type: "FREE_EVENT_REG_SUCCESS",
+      payload: data,
+    });
+  } catch (e) {
+    dispatch({
+      type: "FREE_EVENT_REG_FAILED",
+      payload: e,
+    });
+  }
+};
+
+export const addRegisteredUserToEventArray =
+  (eventId, userId) => async (dispatch) => {
+    try {
+      dispatch({
+        type: "FREE_EVENT_ARR_REQUEST",
+      });
+
+      const config = {
+        "Content-Type": "application/json",
+      };
+
+      const { data } = await axios.put(
+        `/event/free-register-event-array/${eventId}`,
+        { userId },
+        config
+      );
+
+      dispatch({
+        type: "FREE_EVENT_ARR_SUCCESS",
+        payload: data,
+      });
+    } catch (e) {
+      dispatch({
+        type: "FREE_EVENT_ARR_FAILED",
+        payload: e,
+      });
+    }
+  };

@@ -1,7 +1,6 @@
 .dash-container {
   padding: 0 3rem 0.7rem;
   color: #364547;
-
 }
 
 .manage-events {
@@ -39,6 +38,7 @@ h3.header-right {
 .myevent-events-icon {
   align-self: center;
   place-self: end;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {

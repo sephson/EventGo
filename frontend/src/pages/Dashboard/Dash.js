@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { dash } from "../../actions/userActions";
-import { myCreatedEvent } from "../../actions/eventActions";
+import { myCreatedEvent, deleteEvent } from "../../actions/eventActions";
 import "./Dash.css";
 import DashNavbar from "../../components/DashNavbar/DashNavbar";
 import DeleteIcon from "@material-ui/icons/Delete";
+import Loading from "../../components/Loader/Loader";
 
 const Dash = ({ history }) => {
   const dispatch = useDispatch();
@@ -26,8 +27,8 @@ const Dash = ({ history }) => {
   }, [dispatch, userInfo?.user._id]);
 
   const myCE = useSelector((state) => state.myCreatedEvent);
-  const { myEvents } = myCE;
-  console.log(myEvents);
+  const { myEvents, loading } = myCE;
+  // console.log(myEvents);
 
   return (
     <div>
@@ -38,16 +39,31 @@ const Dash = ({ history }) => {
           <div>
             <h3 className="header-left">Manage Events</h3>
             <>
-              {myEvents?.map((myEvent) => {
-                return (
-                  <div className="myevent-events">
-                    <span className="myevent-events-title">
-                      {myEvent.title}
-                    </span>
-                    <DeleteIcon className="myevent-events-icon" />
-                  </div>
-                );
-              })}
+              {loading ? (
+                <Loading
+                  type={"bars"}
+                  color={"#ffb037"}
+                  // width={"10%"}
+                  // height={"50%"}
+                />
+              ) : (
+                myEvents?.map((myEvent) => {
+                  return (
+                    <div className="myevent-events">
+                      <span className="myevent-events-title">
+                        {myEvent.title}
+                      </span>
+                      <DeleteIcon
+                        onClick={() => {
+                          dispatch(deleteEvent(myEvent._id));
+                          window.location.reload();
+                        }}
+                        className="myevent-events-icon"
+                      />
+                    </div>
+                  );
+                })
+              )}
             </>
           </div>
           <div>

@@ -11,6 +11,9 @@ import {
   allEventReducer,
   eventDetailsReducer,
   myCreatedEventsReducers,
+  deleteEventReducer,
+  freeRegisterReducer,
+  freeRegisterArrayReducer,
 } from "./reducers/eventReducer";
 
 const reducer = combineReducers({
@@ -21,6 +24,9 @@ const reducer = combineReducers({
   events: allEventReducer,
   eventDetail: eventDetailsReducer,
   myCreatedEvent: myCreatedEventsReducers,
+  deleteEvent: deleteEventReducer,
+  freeEvent: freeRegisterReducer,
+  freeEventArr: freeRegisterArrayReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

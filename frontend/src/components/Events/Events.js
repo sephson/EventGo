@@ -9,7 +9,7 @@ const Events = () => {
   const dispatch = useDispatch();
 
   const events = useSelector((state) => state.events);
-  const { loading, event, error } = events;
+  const { loading, event } = events;
   console.log(event);
 
   useEffect(() => {

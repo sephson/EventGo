@@ -30,6 +30,19 @@ export const allEventReducer = (state = { event: [] }, action) => {
   }
 };
 
+export const deleteEventReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "DELETE_REQUEST":
+      return { loading: true };
+    case "DELETE_SUCCESS":
+      return { loading: false, success: true };
+    case "DELETE_FAILED":
+      return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
 export const eventDetailsReducer = (state = { details: {} }, action) => {
   switch (action.type) {
     case "EVENT_DETAILS_REQUEST":
@@ -50,7 +63,7 @@ export const eventDetailsReducer = (state = { details: {} }, action) => {
   }
 };
 
-export const myCreatedEventsReducers = (state = {myEvents : []}, action) => {
+export const myCreatedEventsReducers = (state = { myEvents: [] }, action) => {
   switch (action.type) {
     case "MYEVENT_REQUEST":
       return { loading: true };
@@ -64,6 +77,48 @@ export const myCreatedEventsReducers = (state = {myEvents : []}, action) => {
 
     case "MYEVENT_FAILED":
       return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const freeRegisterReducer = (state = {}, action) => {
+  switch (action.type) {
+    case "FREE_EVENT_REG_REQUEST":
+      return { loading: true };
+
+    case "FREE_EVENT_REG_SUCCESS":
+      return {
+        loading: false,
+        success: true,
+        freeReg: action.payload,
+      };
+
+    case "FREE_EVENT_REG_FAILED":
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const freeRegisterArrayReducer = (
+  state = { freeRegistered: [] },
+  action
+) => {
+  switch (action.type) {
+    case "FREE_EVENT_ARR_REQUEST":
+      return { ...state, loading: true };
+    case "FREE_EVENT_ARR_SUCCESS":
+      return {
+        loading: false,
+        success: true,
+        freeRegistered: [...state.freeRegistered, action.payload],
+      };
+
+    case "FREE_EVENT_ARR_FAILED":
+      return { loading: false, success: false, error: action.payload };
 
     default:
       return state;

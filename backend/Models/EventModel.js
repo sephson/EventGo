@@ -37,12 +37,17 @@ const EventSchema = new mongoose.Schema(
     },
     description: {
       type: String,
-      //   required: true,
-      //   min: 50,
-      //   max: 100,
     },
     price: {
       type: Number,
+    },
+    freeRegistered: {
+      type: Array,
+      default: [],
+    },
+    paidRegistered: {
+      type: Array,
+      default: [],
     },
   },
   { timestamps: true }

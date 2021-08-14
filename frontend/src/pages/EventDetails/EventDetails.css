@@ -48,6 +48,10 @@
   font-weight: bold;
 }
 
+p.event-det {
+  margin: 0.2rem;
+}
+
 @media screen and (max-width: 700px) {
   .event-det-wrap {
     display: grid;

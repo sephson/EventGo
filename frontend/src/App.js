@@ -6,6 +6,7 @@ import SignIn from "./pages/SignIn/SignIn";
 import CreateEvent from "./pages/CreateEvent/CreateEvent";
 import EventDetails from "./pages/EventDetails/EventDetails";
 import Dash from "./pages/Dashboard/Dash";
+import RegSuccess from "./pages/RegisteredSuccess/RegSuccess";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/create-event" component={CreateEvent} />
           <Route path="/event-details/:eventId" component={EventDetails} />
           <Route path="/dashboard" component={Dash} />
+          <Route path="/reg-success/:freeRegId" component={RegSuccess} />
         </Switch>
       </Router>
     </>

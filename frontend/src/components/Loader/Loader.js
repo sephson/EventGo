@@ -7,8 +7,8 @@ const Loading = ({ type, color }) => (
     className="loading"
     type={type}
     color={color}
-    height={200}
-    width={155}
+    height={100}
+    width={75}
   />
 );
 
