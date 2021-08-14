@@ -156,33 +156,34 @@ export const myCreatedEvent = (userId) => async (dispatch) => {
   }
 };
 
-export const freeEventReg = (userId, eventId, username) => async (dispatch) => {
-  try {
-    dispatch({
-      type: "FREE_EVENT_REG_REQUEST",
-    });
+export const freeEventReg =
+  (userId, eventId, username, title, email) => async (dispatch) => {
+    try {
+      dispatch({
+        type: "FREE_EVENT_REG_REQUEST",
+      });
 
-    const config = {
-      "Content-Type": "application/json",
-    };
+      const config = {
+        "Content-Type": "application/json",
+      };
 
-    const { data } = await axios.post(
-      `/event/free-register-event/${eventId}`,
-      { userId, username },
-      config
-    );
+      const { data } = await axios.post(
+        `/event/free-register-event/${eventId}`,
+        { userId, username, title, email },
+        config
+      );
 
-    dispatch({
-      type: "FREE_EVENT_REG_SUCCESS",
-      payload: data,
-    });
-  } catch (e) {
-    dispatch({
-      type: "FREE_EVENT_REG_FAILED",
-      payload: e,
-    });
-  }
-};
+      dispatch({
+        type: "FREE_EVENT_REG_SUCCESS",
+        payload: data,
+      });
+    } catch (e) {
+      dispatch({
+        type: "FREE_EVENT_REG_FAILED",
+        payload: e,
+      });
+    }
+  };
 
 export const addRegisteredUserToEventArray =
   (eventId, userId) => async (dispatch) => {
@@ -212,3 +213,61 @@ export const addRegisteredUserToEventArray =
       });
     }
   };
+
+export const iRegForTheseEvents = (userId) => async (dispatch) => {
+  try {
+    dispatch({
+      type: "IREG_EVENT_FOR_REQUEST",
+    });
+
+    const config = {
+      "Content-Type": "application/json",
+    };
+
+    const { data } = await axios.get(
+      `/event/events-i-registered-for/${userId}`,
+      config
+    );
+
+    dispatch({
+      type: "IREG_EVENT_FOR_SUCCESS",
+      payload: data,
+    });
+  } catch (e) {
+    dispatch({
+      type: "IREG_EVENT_FOR_FAILED",
+      payload: e,
+    });
+  }
+};
+
+export const peopleRegisteredList = (eventId) => async (dispatch, getState) => {
+  try {
+    dispatch({
+      type: "PEOPLE_REG_REQUEST",
+    });
+
+    const {
+      userSignin: { userInfo },
+    } = getState();
+
+    const config = {
+      headers: {
+        Authorisation: `Bearer ${userInfo.token}`,
+      },
+    };
+
+    const { data } = await axios.get(`/people-who-registered-for-my-event/${eventId}`, config);
+
+    dispatch({
+      type: "PEOPLE_REG_SUCCESS",
+      payload: data,
+    });
+
+  } catch (error) {
+    dispatch({
+      type: "PEOPLE_REG_FAILED",
+      payload: error.message,
+    });
+  }
+};

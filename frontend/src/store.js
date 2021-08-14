@@ -14,6 +14,8 @@ import {
   deleteEventReducer,
   freeRegisterReducer,
   freeRegisterArrayReducer,
+  eventsIRegForReducer,
+  peopleRegisteredReducer,
 } from "./reducers/eventReducer";
 
 const reducer = combineReducers({
@@ -27,6 +29,8 @@ const reducer = combineReducers({
   deleteEvent: deleteEventReducer,
   freeEvent: freeRegisterReducer,
   freeEventArr: freeRegisterArrayReducer,
+  iRegFor: eventsIRegForReducer,
+  peopleRegList: peopleRegisteredReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

@@ -11,6 +11,8 @@ const {
   freeRegisterEvent,
   registeredFree,
   freeRegisterEventArray,
+  eventsRegisteredForFree,
+  getPeopleThatRegForMyEvent,
 } = EventController;
 
 router.route("/publish").post(protect, createEvent);
@@ -21,5 +23,9 @@ router.route("/delete/:eventId").delete(deleteEvent);
 router.route("/free-register-event/:eventId").post(freeRegisterEvent);
 router.route("/free-register-event-array/:eventId").put(freeRegisterEventArray); //I am adding this so that a particular user doesnt register twice
 router.route("/registered-users-free/:freeRegId").get(registeredFree);
+router.route("/events-i-registered-for/:userId").get(eventsRegisteredForFree);
+router
+  .route("/people-who-registered-for-my-event/:eventId")
+  .get(protect, getPeopleThatRegForMyEvent);
 
 module.exports = router;

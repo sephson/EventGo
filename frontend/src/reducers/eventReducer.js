@@ -124,3 +124,45 @@ export const freeRegisterArrayReducer = (
       return state;
   }
 };
+
+export const eventsIRegForReducer = (
+  state = { iRegisteredFor: [] },
+  action
+) => {
+  switch (action.type) {
+    case "IREG_EVENT_FOR_REQUEST":
+      return { loading: true };
+    case "IREG_EVENT_FOR_SUCCESS":
+      return {
+        loading: false,
+        iRegisteredFor: action.payload,
+      };
+
+    case "IREG_EVENT_FOR_FAILED":
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
+export const peopleRegisteredReducer = (
+  state = { peopleRegistered: [] },
+  action
+) => {
+  switch (action.type) {
+    case "PEOPLE_REG_REQUEST":
+      return { loading: true };
+    case "PEOPLE_REG_SUCCESS":
+      return {
+        loading: false,
+        peopleRegistered: action.payload,
+      };
+
+    case "PEOPLE_REG_FAILED":
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};

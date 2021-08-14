@@ -34,9 +34,9 @@
 .hero-btn {
   color: white;
   background-color: #ffb037;
-  padding: 1rem;
+  padding: 0.8rem;
   border: none;
-  border-radius: 1rem;
+  border-radius: 0.5rem;
   font-weight: 700;
 }
 

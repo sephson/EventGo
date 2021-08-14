@@ -1,0 +1,33 @@
+.success-container {
+  background-color: #3645470f;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  color: #364547;
+}
+
+.success-wrap {
+  background-color: white;
+  padding: 0.5rem;
+  width: 50%;
+  height: 25%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.check-circle {
+  color: green;
+  font-size: 3rem !important;
+  margin-bottom: 3rem;
+}
+
+.success-btn {
+  color: white;
+  background-color: #ffb037;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  margin-left: 46%;
+  margin-top: 1rem;
+}

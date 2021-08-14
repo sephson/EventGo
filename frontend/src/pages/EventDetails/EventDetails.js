@@ -13,6 +13,7 @@ import Navbar from "../../components/Navbar/Navbar";
 
 const EventDetails = ({ history }) => {
   const eventId = useParams().eventId;
+  const title = useParams().title;
 
   const dispatch = useDispatch();
 
@@ -38,7 +39,13 @@ const EventDetails = ({ history }) => {
       history.push(`/sign-in`);
     }
     dispatch(
-      freeEventReg(userInfo?.user._id, eventId, userInfo?.user.username)
+      freeEventReg(
+        userInfo?.user._id,
+        eventId,
+        userInfo?.user.username,
+        title,
+        userInfo?.user.email
+      )
     );
     dispatch(addRegisteredUserToEventArray(eventId, userInfo?.user._id));
   };

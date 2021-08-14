@@ -12,6 +12,12 @@ const FreeEventRegSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    title: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
   },
   { timestamps: true }
 );

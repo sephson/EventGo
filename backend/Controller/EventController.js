@@ -95,13 +95,15 @@ exports.freeRegisterEvent = async (req, res) => {
     console.log(req.params.eventId);
 
     if (event) {
-      const { userId, username } = req.body;
+      const { userId, username, email, title } = req.body;
       const { eventId } = req.params;
 
       const freeEvent = await FreeEventReg.create({
         userId,
         eventId,
         username,
+        title,
+        email,
       });
 
       res.status(200).json(freeEvent);
@@ -141,17 +143,26 @@ exports.registeredFree = async (req, res) => {
   }
 };
 
-// exports.registeredFree = async (req, res) => {
-//   try {
-//     const event = await Event.findById(req.params.eventId);
+exports.eventsRegisteredForFree = async (req, res) => {
+  try {
+    // const user = await Event.findById(req.params.userId);
 
-//     if (event) {
-//       const freeRegisteredUsers = await FreeEventReg.find({
-//         eventId: req.params.eventId,
-//       });
-//       res.status(200).json(freeRegisteredUsers);
-//     }
-//   } catch (error) {
-//     res.status(500).json(error.message);
-//   }
-// };
+    const eventsIregisteredfor = await FreeEventReg.find({
+      userId: req.params.userId,
+    });
+    res.status(200).json(eventsIregisteredfor);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
+exports.getPeopleThatRegForMyEvent = async (req, res) => {
+  try {
+    const peopleReg = await FreeEventReg.find({
+      eventId: req.params.eventId,
+    });
+    res.status(200).json(peopleReg);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
