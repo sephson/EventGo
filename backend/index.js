@@ -4,6 +4,7 @@ const express = require("express");
 const connectDB = require("./Config/db");
 const morgan = require("morgan");
 const helmet = require("helmet");
+// const paystack = require("paystack")(process.env.PAYSTACK_SECRET_KEY);
 const path = require("path");
 const userRoute = require("./Routes/UserRoute");
 const eventRoute = require("./Routes/EventRoute");

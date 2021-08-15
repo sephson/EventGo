@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+//this also involves paid events...dont wanna add new model for paid
 const FreeEventRegSchema = new mongoose.Schema(
   {
     eventId: {
@@ -17,6 +17,9 @@ const FreeEventRegSchema = new mongoose.Schema(
     },
     email: {
       type: String,
+    },
+    price: {
+      type: Number,
     },
   },
   { timestamps: true }

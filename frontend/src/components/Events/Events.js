@@ -28,7 +28,9 @@ const Events = () => {
         <div className="event-container">
           {event.map((event) => {
             return (
-              <Link to={`/event-details/${event._id}/${event.title}`}>
+              <Link
+                to={`/event-details/${event._id}/${event.title}/${event.price}`}
+              >
                 <div className="single-event-wrap">
                   <div className="event-image">
                     <img

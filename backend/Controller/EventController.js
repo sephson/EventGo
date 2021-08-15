@@ -1,6 +1,9 @@
 const Event = require("../Models/EventModel");
 const FreeEventReg = require("../Models/FreeRegisterEventModel");
 const User = require("../Models/UserModel");
+const paystack = require("paystack")(process.env.PAYSTACK_SECRET_KEY);
+
+//note-free registered also involves paid registereation. a post and put request will occur when users have paid
 
 exports.createEvent = async (req, res, next) => {
   const {
@@ -165,4 +168,11 @@ exports.getPeopleThatRegForMyEvent = async (req, res) => {
   } catch (error) {
     res.status(500).json(error.message);
   }
+};
+
+exports.paymentEvent = async (req, res) => {
+  try {
+    const { userId, username, email, title } = req.body;
+    const { eventId } = req.params;
+  } catch (error) {}
 };

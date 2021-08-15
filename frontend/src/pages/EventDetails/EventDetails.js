@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./EventDetails.css";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Footer from "../../components/Footer/Footer";
 import {
   eventDetailInfo,
@@ -14,6 +14,7 @@ import Navbar from "../../components/Navbar/Navbar";
 const EventDetails = ({ history }) => {
   const eventId = useParams().eventId;
   const title = useParams().title;
+  const price = useParams().price;
 
   const dispatch = useDispatch();
 
@@ -114,9 +115,11 @@ const EventDetails = ({ history }) => {
                     {loading ? "Registering" : "Register"}
                   </button>
                 ) : (
-                  <button className="event-reg-btn">
-                    Pay {`₦${details.price}`}
-                  </button>
+                  <Link to={`/${eventId}/${title}/${price}/checkout`}>
+                    <button className="event-reg-btn">
+                      Pay {`₦${details.price}`}
+                    </button>
+                  </Link>
                 )}
               </>
             )}
