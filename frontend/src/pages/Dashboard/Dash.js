@@ -87,7 +87,9 @@ const Dash = ({ history }) => {
               {iRegisteredFor?.map((ireg) => {
                 return (
                   <div className="myevent-events">
-                    <Link to={`/event-details/${ireg.eventId}/${ireg.title}`}>
+                    <Link
+                      to={`/event-details/${ireg.eventId}/${ireg.title}/${ireg.price}`}
+                    >
                       <span className="myevent-events-title">{ireg.title}</span>
                     </Link>
                   </div>

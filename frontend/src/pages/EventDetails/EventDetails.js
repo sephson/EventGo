@@ -52,10 +52,10 @@ const EventDetails = ({ history }) => {
   };
 
   useEffect(() => {
-    if (freeReg?._id !== undefined) {
+    if (freeReg?._id) {
       history.push(`/reg-success/${freeReg?._id}`);
     }
-  }, [history, success, freeReg?._id]);
+  }, [history, success, error, freeReg?._id]);
 
   console.log(freeReg);
 

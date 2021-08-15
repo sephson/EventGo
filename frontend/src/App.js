@@ -9,6 +9,7 @@ import Dash from "./pages/Dashboard/Dash";
 import RegSuccess from "./pages/RegisteredSuccess/RegSuccess";
 import ManageEvent from "./pages/ManageEvent/ManageEvent";
 import CheckOut from "./pages/CheckOutPage/CheckOut";
+import TestFlutterwave from "./pages/TestFlutterwave";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             component={CheckOut}
             // /event-details/${eventId}/${title}/${price}/checkout
           />
+          <Route path="/test" component={TestFlutterwave} />
         </Switch>
       </Router>
     </>

@@ -14,7 +14,7 @@ const {
   freeRegisterEventArray,
   eventsRegisteredForFree,
   getPeopleThatRegForMyEvent,
-  paymentEvent,
+ 
 } = EventController;
 
 router.route("/publish").post(protect, createEvent);
@@ -29,5 +29,5 @@ router.route("/events-i-registered-for/:userId").get(eventsRegisteredForFree);
 router
   .route("/people-who-registered-for-my-event/:eventId")
   .get(protect, getPeopleThatRegForMyEvent);
-router.route("/payment/:eventId").post(paymentEvent);
+// router.route("/payment/:eventId").post(paymentEvent);
 module.exports = router;
