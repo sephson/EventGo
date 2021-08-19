@@ -8,7 +8,8 @@ export const userSignUpReducer = (state = {}, action) => {
 
     case "USER_SIGNUP_FAILED":
       return { loading: false, error: action.payload };
-
+    case "USER_SIGNOUT":
+      return {};
     default:
       return state;
   }
@@ -24,7 +25,8 @@ export const userSignInReducer = (state = {}, action) => {
 
     case "USER_SIGNIN_FAILED":
       return { loading: false, error: action.payload };
-
+    case "USER_SIGNOUT":
+      return {};
     default:
       return state;
   }

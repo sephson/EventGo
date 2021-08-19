@@ -111,7 +111,8 @@ const CreateEvent = ({ history }) => {
 
   useEffect(() => {
     if (success === true) {
-      history.push("/dashboard");
+      // history.push("/dashboard");
+      document.location.href = "/dashboard";
     } else {
       return "Failed to publish";
     }

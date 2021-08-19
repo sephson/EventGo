@@ -19,8 +19,8 @@ const CheckOut = ({ history }) => {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
-  //   const free = useSelector((state) => state.freeEvent);
-  //   const {} = free;
+  const free = useSelector((state) => state.freeEvent);
+  const { freeReg } = free;
 
   //   const freeArr = useSelector((state) => state.freeEventArr);
   //   const { success } = freeArr;
@@ -32,7 +32,7 @@ const CheckOut = ({ history }) => {
   });
 
   const config = {
-    public_key: "FLWPUBK_TEST-cd1a2ac453695cbe34fdd884d9c00fe4-X",
+    public_key: process.env.REACT_APP_PUBLIC_KEY,
     tx_ref: Date.now(),
     amount: price,
     currency: "NGN",
@@ -73,7 +73,7 @@ const CheckOut = ({ history }) => {
                       addRegisteredUserToEventArray(eventId, userInfo?.user._id)
                     )
                   );
-                  history.push("/dashboard");
+                  document.location.href = `/reg-success/${freeReg?._id}`;
                 }
                 closePaymentModal(); // this will close the modal programmatically
               },

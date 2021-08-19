@@ -92,3 +92,11 @@ export const dash = (id) => async (dispatch, getState) => {
     });
   }
 };
+
+export const signout = () => (dispatch) => {
+  localStorage.removeItem("userInfo");
+
+  dispatch({ type: "USER_SIGNOUT" });
+
+  document.location.href = "/sign-in";
+};

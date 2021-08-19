@@ -6,7 +6,11 @@
   cursor: pointer;
 }
 
-.username-user:hover {
+.drop-down-logout {
+  margin: 0.3rem 0.4rem;
+}
+
+.drop-down-logout:hover {
   cursor: pointer;
   background-color: #3645470f;
   padding: 0.1rem;
@@ -75,6 +79,21 @@ h1 {
 
 .change.line-3 {
   transform: rotateZ(405deg) translate(-5px, -6px);
+}
+
+.dropdown {
+  padding: 0 3rem;
+  text-align: end;
+  transition-duration: 4s;
+  transition-delay: 2s;
+}
+
+.ddmenu {
+  display: flex;
+}
+
+.drop {
+  display: none;
 }
 
 @media screen and (max-width: 600px) {

@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-// import { signin } from "../../actions/userActions";
+import { useSelector, useDispatch } from "react-redux";
+import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
+import { signout } from "../../actions/userActions";
 import "./Navbar.css";
 
 const Navbar = () => {
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
 
@@ -14,12 +15,18 @@ const Navbar = () => {
     setClick(!click);
   };
 
+  const [openDropDown, setOpenDropDown] = useState(false);
+
   const closeMobileMenu = () => {
     setClick(false);
   };
 
+  const signOutHandler = () => {
+    dispatch(signout())
+  }
+
   return (
-    <>
+    <main className="navbar-main-wrapper">
       <nav className="navbarItems">
         <div className="desktop">
           <div className="left-side-nav">
@@ -35,11 +42,15 @@ const Navbar = () => {
               </li>
             </Link>
             {userInfo ? (
-              <Link to={`/dashboard`}>
-                <>
-                  <div className="username-user">{userInfo?.user.username}</div>
-                </>
-              </Link>
+              <div className="ddmenu">
+                <div
+                  onClick={() => setOpenDropDown(!openDropDown)}
+                  className="username-user"
+                >
+                  {userInfo?.user.username}
+                </div>
+                <ArrowDropDownIcon />
+              </div>
             ) : (
               <Link to="/sign-up">
                 <li className="nav-links" onClick={closeMobileMenu}>
@@ -72,15 +83,23 @@ const Navbar = () => {
             </li>
           </Link>
           {userInfo ? (
-            <Link to={`/dashboard`}>
+            <>
+              <Link to={`/dashboard`}>
+                <li
+                  className="nav-links"
+                  onClick={closeMobileMenu}
+                  // className="username-user"
+                >
+                  {userInfo?.user.username}
+                </li>
+              </Link>
               <li
                 className="nav-links"
-                onClick={closeMobileMenu}
-                // className="username-user"
+                onClick={(closeMobileMenu, signOutHandler)}
               >
-                {userInfo?.user.username}
+                Logout
               </li>
-            </Link>
+            </>
           ) : (
             <Link to="/sign-up">
               <li className="nav-links" onClick={closeMobileMenu}>
@@ -90,7 +109,15 @@ const Navbar = () => {
           )}
         </ul>
       </nav>
-    </>
+      <div className={openDropDown ? " dropdown " : "drop"}>
+        <Link to={`/dashboard`}>
+          <div className="drop-down-logout">Dashboard</div>
+        </Link>
+        <div onClick={signOutHandler} className="drop-down-logout">
+          Logout
+        </div>
+      </div>
+    </main>
   );
 };
 

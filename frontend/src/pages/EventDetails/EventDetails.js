@@ -53,7 +53,8 @@ const EventDetails = ({ history }) => {
 
   useEffect(() => {
     if (freeReg?._id) {
-      history.push(`/reg-success/${freeReg?._id}`);
+      // history.push(`/reg-success/${freeReg?._id}`);
+      document.location.href = `/reg-success/${freeReg?._id}`;
     }
   }, [history, success, error, freeReg?._id]);
 

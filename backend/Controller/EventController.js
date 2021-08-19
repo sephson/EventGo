@@ -83,8 +83,10 @@ exports.eventsCreated = async (req, res) => {
 exports.deleteEvent = async (req, res) => {
   try {
     const event = await Event.findById(req.params.eventId);
+
     if (event) {
       await event.remove();
+      await FreeEventReg.deleteMany({ eventId: req.params.eventId });
       res.json({ message: "Product removed" });
     } else res.status(404).json("event not found");
   } catch (error) {
