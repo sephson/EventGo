@@ -4,9 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd frontend && yarn run build",
-    "heroku-postbuild": "YARN_CONFIG_PRODUCTION=false yarn init --prefix frontend && yarn run build prefix --frontend",
-    "start": "node backend/index"
+    "start": "node backend/index",
+    "build": "cd frontend && yarn run build"
+    
   },
   "author": "Disu",
   "license": "MIT",
