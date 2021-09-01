@@ -37,8 +37,8 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(errorHandler);
 
-const server = app.listen(process.env.PORT, () =>
-  console.log(`server running at ${process.env.PORT}`)
+const server = app.listen(process.env.PORT || 5000, () =>
+  console.log(`server running `)
 );
 
 process.on("unhandledRejection", (err) => {
