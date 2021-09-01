@@ -8,8 +8,6 @@
     "install-frontend": "cd frontend && yarn init",
     "heroku-postbuild": "yarn run install-frontend && yarn run build",
     "start": "node backend/index"
-
-   
   },
   "author": "Disu",
   "license": "MIT",
@@ -26,5 +24,8 @@
     "multer": "^1.4.3",
     "nodemon": "^2.0.12",
     "path": "^0.12.7"
+  },
+  "engines": {
+    "node": "14.15.1"
   }
 }
