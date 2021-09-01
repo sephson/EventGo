@@ -22,8 +22,8 @@ const Navbar = () => {
   };
 
   const signOutHandler = () => {
-    dispatch(signout())
-  }
+    dispatch(signout());
+  };
 
   return (
     <main className="navbar-main-wrapper">
@@ -93,10 +93,7 @@ const Navbar = () => {
                   {userInfo?.user.username}
                 </li>
               </Link>
-              <li
-                className="nav-links"
-                onClick={(closeMobileMenu, signOutHandler)}
-              >
+              <li className="nav-links" onClick={signOutHandler}>
                 Logout
               </li>
             </>
