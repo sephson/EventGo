@@ -26,7 +26,7 @@ const Events = () => {
         <Loading type={"bars"} color={"#ffb037"} />
       ) : (
         <div className="event-container">
-          {event.map((event) => {
+          {event?.map((event) => {
             return (
               <Link
                 to={`/event-details/${event._id}/${event.title}/${event.price}`}

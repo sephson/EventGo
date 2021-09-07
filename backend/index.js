@@ -21,7 +21,7 @@ app.use("/users", userRoute);
 app.use("/event", eventRoute);
 app.use("/upload", uploadRoute);
 
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));

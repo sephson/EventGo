@@ -98,7 +98,7 @@ const CreateEvent = ({ history }) => {
       title.length < 2 ||
       organiser.length < 2 ||
       (location || online).length < 2 ||
-      image < 2 ||
+      !image ||
       startDate < 2 ||
       startTime < 2
     )

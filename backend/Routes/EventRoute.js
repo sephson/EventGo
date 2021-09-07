@@ -14,7 +14,6 @@ const {
   freeRegisterEventArray,
   eventsRegisteredForFree,
   getPeopleThatRegForMyEvent,
- 
 } = EventController;
 
 router.route("/publish").post(protect, createEvent);
