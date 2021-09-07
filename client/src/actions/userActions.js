@@ -19,16 +19,11 @@ export const signup = (username, email, password) => async (dispatch) => {
       payload: data,
     });
 
-    dispatch({
-      type: "USER_SIGNIN_SUCCESS",
-      payload: data,
-    });
-
     localStorage.setItem("userInfo", JSON.stringify(data));
   } catch (error) {
     dispatch({
-      type: "USER_SIGNUP_FAIL",
-      payload: error.message,
+      type: "USER_SIGNUP_FAILED",
+      payload: error,
     });
   }
 };

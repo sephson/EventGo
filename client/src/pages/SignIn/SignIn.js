@@ -14,7 +14,7 @@ const SignIn = ({ location, history }) => {
   const [password, setPassword] = useState("");
 
   const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const { error, loading, userInfo } = userSignin;
 
   // const redirect = location.search ? location.search.split("=")[1] : "/";
 
@@ -37,6 +37,7 @@ const SignIn = ({ location, history }) => {
       <div className="signup">
         <form onSubmit={handleSignup} className="signup-container">
           <h2 className="signup-logo">eventgo</h2>
+          {error ? <p className="error">Password or Email is incorrect</p> : ""}
           <input
             className="signup-input"
             placeholder="Email"
@@ -55,7 +56,7 @@ const SignIn = ({ location, history }) => {
           />
 
           <button type="submit" className="signup-button">
-            Sign In
+            {loading ? "Loading..." : "Sign In"}
           </button>
           <Link to="/sign-up">
             <p> don't have an account ? </p>

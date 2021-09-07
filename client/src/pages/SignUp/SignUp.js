@@ -1,8 +1,8 @@
 import "./SignUp.css";
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import Footer from "../../components/Footer/Footer";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../actions/userActions";
 
 const SignUp = () => {
@@ -12,6 +12,10 @@ const SignUp = () => {
   const passwordAgain = useRef();
 
   const dispatch = useDispatch();
+
+  const userSignup = useSelector((state) => state.userSignup);
+  const x = userSignup;
+  console.log(x);
 
   const handleSignup = (e) => {
     e.preventDefault();
@@ -27,11 +31,19 @@ const SignUp = () => {
       dispatch(signup(user.username, user.email, user.password));
     }
   };
+
+  useEffect(() => {
+    if (x?.userInfo?.success === true) {
+      document.location.href = `/`;
+    }
+  }, [x?.userInfo?.success]);
+
   return (
     <>
       <div className="signup">
         <form onSubmit={handleSignup} className="signup-container">
           <h2 className="signup-logo">eventgo</h2>
+          {x?.error ? <p className="error">This user already exist</p> : ""}
           <input
             ref={username}
             className="signup-input"
@@ -51,7 +63,7 @@ const SignUp = () => {
             ref={passwordAgain}
           />
           <button type="submit" className="signup-button">
-            Sign Up
+            {x?.loading ? "Loading..." : "Sign Up"}
           </button>
           <Link to="/sign-in">
             <p> already have an account ? </p>

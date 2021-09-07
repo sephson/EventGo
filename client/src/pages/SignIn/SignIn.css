@@ -33,3 +33,8 @@
 .signup-logo {
   color: #ffb037;
 }
+
+.error {
+  color: red;
+  text-align: center;
+}

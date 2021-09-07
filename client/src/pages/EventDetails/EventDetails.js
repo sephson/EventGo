@@ -10,6 +10,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
+import Loading from "../../components/Loader/Loader";
 
 const EventDetails = ({ history }) => {
   const eventId = useParams().eventId;
@@ -19,8 +20,9 @@ const EventDetails = ({ history }) => {
   const dispatch = useDispatch();
 
   const eventDetail = useSelector((state) => state.eventDetail);
-  const { details } = eventDetail;
-  // console.log(details);
+  const d = eventDetail;
+  const details = d.details;
+  console.log(d);
 
   useEffect(() => {
     dispatch(eventDetailInfo(eventId));
@@ -58,74 +60,80 @@ const EventDetails = ({ history }) => {
     }
   }, [history, success, error, freeReg?._id]);
 
-  console.log(freeReg);
+  // console.log(freeReg);
 
   return (
     <>
       <Navbar />
+      {d.loading ? (
+        <Loading
+          style={{ "align-items": "center" }}
+          type={"bars"}
+          color={"#ffb037"}
+        />
+      ) : (
+        <div className="event-details-container">
+          <div className="event-det-wrap">
+            <div className="event-image-wrap">
+              <img
+                className="event-details-art "
+                src={details.image}
+                alt="eventart"
+              />
+              <p className="event-description">{details.description}</p>
+            </div>
 
-      <div className="event-details-container">
-        <div className="event-det-wrap">
-          <div className="event-image-wrap">
-            <img
-              className="event-details-art "
-              src={details.image}
-              alt="eventart"
-            />
-            <p className="event-description">{details.description}</p>
-          </div>
+            <main className=" main-event-det">
+              <h3 className="event-det-header">{details.title}</h3>
+              {details.endDate && details.endTime ? (
+                <>
+                  <p className="event-det">
+                    {details.startDate}
+                    {`-${details.endDate}`}
+                  </p>
+                  <p className="event-det">
+                    {details.startTime}
+                    {`-${details.endTime}`}
+                  </p>
+                </>
+              ) : (
+                <>
+                  <p className="event-det">Starts: {details.startDate}</p>
+                  <p className="event-det">Time: {details.startTime}</p>
+                </>
+              )}
 
-          <main className=" main-event-det">
-            <h3 className="event-det-header">{details.title}</h3>
-            {details.endDate && details.endTime ? (
-              <>
-                <p className="event-det">
-                  {details.startDate}
-                  {`-${details.endDate}`}
-                </p>
-                <p className="event-det">
-                  {details.startTime}
-                  {`-${details.endTime}`}
-                </p>
-              </>
-            ) : (
-              <>
-                <p className="event-det">Starts: {details.startDate}</p>
-                <p className="event-det">Time: {details.startTime}</p>
-              </>
-            )}
-
-            <p className="event-det">
-              {details.location ? details.location : "Online"}
-            </p>
-            <em className="event-det">{details?.organiser}</em>
-            <p>
-              {details?.price === 0 || details?.price === null
-                ? "Free"
-                : `₦${details.price}`}
-            </p>
-            {console.log(details)}
-            {details?.freeRegistered?.includes(userInfo?.user._id) ? (
-              <h3 style={{ color: "red" }}>
-                YOU HAVE REGISTERED FOR THIS EVENT
-              </h3>
-            ) : (
-              <>
-                {details?.price === 0 || details?.price === null ? (
-                  <button onClick={handleFreeReg} className="event-reg-btn">
-                    {loading ? "Registering" : "Register"}
-                  </button>
-                ) : (
-                  <Link to={`/${eventId}/${title}/${price}/checkout`}>
-                    <button className="event-reg-btn">
-                      Pay {`₦${details.price}`}
+              <p className="event-det">
+                {details.location ? details.location : "Online"}
+              </p>
+              <em className="event-det">{details?.organiser}</em>
+              <p>
+                {details?.price === 0 || details?.price === null
+                  ? "Free"
+                  : `₦${details.price}`}
+              </p>
+              {console.log(details)}
+              {details?.freeRegistered?.includes(userInfo?.user._id) ? (
+                <h3 style={{ color: "red" }}>
+                  YOU HAVE REGISTERED FOR THIS EVENT
+                </h3>
+              ) : (
+                <>
+                  {details?.price === 0 || details?.price === null ? (
+                    <button onClick={handleFreeReg} className="event-reg-btn">
+                      {loading ? "Registering" : "Register"}
                     </button>
-                  </Link>
-                )}
-              </>
-            )}
+                  ) : (
+                    <Link to={`/${eventId}/${title}/${price}/checkout`}>
+                      <button className="event-reg-btn">
+                        Pay {`₦${details.price}`}
+                      </button>
+                    </Link>
+                  )}
+                </>
+              )}
 
-            {/* {details.price === 0 || details.price === null ? (
+              {/* {details.price === 0 || details.price === null ? (
               <button onClick={handleFreeReg} className="event-reg-btn">
                 {loading ? "Registering" : "Register"}
               </button>
@@ -134,10 +142,12 @@ const EventDetails = ({ history }) => {
                 Pay {`₦${details.price}`}
               </button>
             )} */}
-            {error ? "Failed" : ""}
-          </main>
+              {error ? "Failed" : ""}
+            </main>
+          </div>
         </div>
-      </div>
+      )}
+
       <Footer />
     </>
   );
